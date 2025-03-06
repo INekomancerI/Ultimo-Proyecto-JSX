@@ -26,6 +26,14 @@ h1{
   margin: 0%;
 }
 
+#mostrarTareas{
+  align-self: center;
+  height: 60%;
+  padding: 6px;
+  margin-right: 2%;
+  background-color: black;
+}
+
 button{
   font-size: 1rem;
   padding: 0.7% 2%;

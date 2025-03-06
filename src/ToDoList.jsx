@@ -59,8 +59,9 @@ function ToDoList() {
     <div className="lista-de-tareas">
       <div id="header">
         <h1>Lista de Tareas</h1>
-        <button onClick={togglemostrarTodas}>
-          {mostrarTodas ? "Mostrar Pendientes" : "Mostrar Todas"}
+        <button onClick={togglemostrarTodas}
+        id='mostrarTareas'>
+          {mostrarTodas ? "No mostrar completadas" : "Mostrar Todas"}
         </button>
       </div>
 
@@ -84,7 +85,7 @@ function ToDoList() {
               checked={tarea.completada}
               onChange={() => toggleTaskCompletion(index)}
             />
-            {editandoIndex === index ? ( // Check if this task is being edited
+            {editandoIndex === index ? (
               <input
                 type="text"
                 value={textoEditado}
@@ -94,7 +95,7 @@ function ToDoList() {
               <span
                 className="texto"
                 style={{
-                  textDecoration: tarea.completada ? "line-through" : "none",
+                  backgroundColor: tarea.completada ? "rgb(228, 228, 228)" : "none",
                 }}
               >
                 {tarea.text}
@@ -102,7 +103,7 @@ function ToDoList() {
             )}
             <button
               className="boton-editar-tarea"
-              onClick={() => toggleEdit(index)} // Toggle edit/save mode
+              onClick={() => toggleEdit(index)}
             >
               {editandoIndex === index ? "Guardar" : "Actualizar"}
             </button>
