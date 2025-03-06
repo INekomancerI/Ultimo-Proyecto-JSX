@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 
 function ToDoList() {
-  const [tareas, setTareas] = useState(["Comer", "Ducharse", "Caminar al conejo"]);
+  const [tareas, setTareas] = useState([
+    { text: "Comer", completada: false },
+    { text: "Ducharse", completada: false },
+    { text: "Caminar al conejo", completada: false },
+  ]);
   const [nuevaTarea, setNuevaTarea] = useState("");
-  const [editandoIndex, seteditandoIndex] = useState(null);
-  const [textoEditado, settextoEditado] = useState("");
+  const [editandoIndex, setEditandoIndex] = useState(null); 
+  const [textoEditado, setTextoEditado] = useState(""); 
+  const [mostrarTodas, setMostrarTodas] = useState(true); 
 
   function handleInputChange(event) {
     setNuevaTarea(event.target.value);
@@ -12,7 +17,7 @@ function ToDoList() {
 
   function añadirTarea() {
     if (nuevaTarea.trim() !== "") {
-      setTareas((t) => [...t, nuevaTarea]);
+      setTareas((t) => [...t, { text: nuevaTarea, completada: false }]);
       setNuevaTarea("");
     }
   }
@@ -22,25 +27,41 @@ function ToDoList() {
     setTareas(tareasActualizadas);
   }
 
-  function activarEdicion(index) {
+  function toggleEdit(index) {
     if (editandoIndex === index) {
       if (textoEditado.trim() !== "") {
         const tareasActualizadas = [...tareas];
-        tareasActualizadas[index] = textoEditado;
+        tareasActualizadas[index].text = textoEditado; 
         setTareas(tareasActualizadas);
       }
-      seteditandoIndex(null);
+      setEditandoIndex(null); 
     } else {
-
-      seteditandoIndex(index);
-      settextoEditado(tareas[index]);
+      setEditandoIndex(index);
+      setTextoEditado(tareas[index].text); 
     }
   }
+
+  function toggleTaskCompletion(index) {
+    const tareasActualizadas = [...tareas];
+    tareasActualizadas[index].completada = !tareasActualizadas[index].completada; 
+    setTareas(tareasActualizadas);
+  }
+
+  function togglemostrarTodas() {
+    setMostrarTodas((prev) => !prev); 
+  }
+
+  const filteredTareas = mostrarTodas
+    ? tareas
+    : tareas.filter((tarea) => !tarea.completada);
 
   return (
     <div className="lista-de-tareas">
       <div id="header">
         <h1>Lista de Tareas</h1>
+        <button onClick={togglemostrarTodas}>
+          {mostrarTodas ? "Mostrar Pendientes" : "Mostrar Todas"}
+        </button>
       </div>
 
       <div id="crea-tarea">
@@ -56,23 +77,34 @@ function ToDoList() {
       </div>
 
       <ol>
-        {tareas.map((tarea, index) => (
+        {filteredTareas.map((tarea, index) => (
           <li key={index}>
-            <input type="checkbox" />
-            {editandoIndex === index ? (
+            <input
+              type="checkbox"
+              checked={tarea.completada}
+              onChange={() => toggleTaskCompletion(index)}
+            />
+            {editandoIndex === index ? ( // Check if this task is being edited
               <input
                 type="text"
                 value={textoEditado}
-                onChange={(e) => settextoEditado(e.target.value)}
+                onChange={(e) => setTextoEditado(e.target.value)}
               />
             ) : (
-              <span className="texto">{tarea}</span>
+              <span
+                className="texto"
+                style={{
+                  textDecoration: tarea.completada ? "line-through" : "none",
+                }}
+              >
+                {tarea.text}
+              </span>
             )}
             <button
               className="boton-editar-tarea"
-              onClick={() => activarEdicion(index)}
+              onClick={() => toggleEdit(index)} // Toggle edit/save mode
             >
-              {editandoIndex === index ? "Guardar" : "Actualizar"} 
+              {editandoIndex === index ? "Guardar" : "Actualizar"}
             </button>
             <button
               className="boton-borrar-tarea"

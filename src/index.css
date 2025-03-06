@@ -14,9 +14,11 @@ html{
 
 #header{
   background-color: rgb(67, 124, 247);
+  display: flex;
 }
 
 h1{
+  flex: 1;
   font-weight: lighter;
   font-size: 150%;
   color: white;
