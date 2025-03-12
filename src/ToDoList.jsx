@@ -47,7 +47,7 @@ function ToDoList() {
     setTareas(tareasActualizadas);
   }
 
-  function togglemostrarTodas() {
+  function toggleMostrarTodas() {
     setMostrarTodas((prev) => !prev); 
   }
 
@@ -59,7 +59,7 @@ function ToDoList() {
     <div className="lista-de-tareas">
       <div id="header">
         <h1>Lista de Tareas</h1>
-        <button onClick={togglemostrarTodas}
+        <button onClick={toggleMostrarTodas}
         id='mostrarTareas'>
           {mostrarTodas ? "No mostrar completadas" : "Mostrar Todas"}
         </button>
@@ -79,7 +79,9 @@ function ToDoList() {
 
       <ol>
         {filteredTareas.map((tarea, index) => (
-          <li key={index}>
+          <li key={index} style={{
+            backgroundColor: tarea.completada ? "rgba(0, 0, 0, 0)" : "rgba(255, 255, 255, 0.50)",
+          }}>
             <input
               type="checkbox"
               checked={tarea.completada}
@@ -94,9 +96,6 @@ function ToDoList() {
             ) : (
               <span
                 className="texto"
-                style={{
-                  backgroundColor: tarea.completada ? "rgb(228, 228, 228)" : "none",
-                }}
               >
                 {tarea.text}
               </span>

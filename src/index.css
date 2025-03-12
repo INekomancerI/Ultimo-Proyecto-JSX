@@ -31,7 +31,7 @@ h1{
   height: 60%;
   padding: 6px;
   margin-right: 2%;
-  background-color: black;
+  background-color: rgb(51, 93, 184);
 }
 
 button{
@@ -49,7 +49,7 @@ button{
   border-radius: 5px;
   padding: 0.2% 0.5% 0.05% 0.5%;
   background-color: rgb(32, 197, 32);
-  margin: 0% 0% 0% -3%;
+  margin: 0% 0% 0% -5%;
 }
 
 .boton-añadir-tarea:hover{
@@ -67,16 +67,12 @@ button{
 .boton-borrar-tarea{
   font-weight: bold;
   color: gray;
+  background-color: rgba(0, 0, 0 , 0);
 }
 
 .boton-borrar-tarea:hover{
   font-weight: bold;
   color: rgb(77, 77, 77);
-}
-
-input[type="checkbox"]{
-  background-color: rgb(43, 42, 42);
-  border-style: none;
 }
 
 input[type="text"]{
@@ -93,24 +89,31 @@ input[type="text"]{
   margin-top: 0%;
   background-color: white;
   margin-bottom: 0%;
+  box-shadow: 7px 7px 7px rgba(128, 128, 128, 0.267);
 }
 
 ol{
   padding: 0%;
-  margin-top: 5px;
+  margin-top: 0px;
 }
 
 li{
   font-size: 150%;
   padding: 1%;
   background-color: rgb(241, 241, 241);
-  margin-bottom: 5px;
+  box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.267);
   border-radius: 5px;
   display: flex;
   align-items: center;
+}
+
+input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
 }
 
 .texto{
   flex: 1;
   margin-left: 1%;
 }
+
